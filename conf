@@ -118,13 +118,13 @@ yarn_val[3]="/home/dataDir/data/osd/yarn/nm"
 yarn_val[4]="/home/dataDir/data/osd/yarn/container-logs"
 yarn_val[5]=81920
 yarn_val[6]=24
-yarn_val[7]=80
+yarn_val[7]=81920
 yarn_val[8]=24
-yarn_val[9]=80
+yarn_val[9]=81920
 yarn_val[10]=24
-yarn_val[11]=80
+yarn_val[11]=81920
 yarn_val[12]=24
-yarn_val[13]=80
+yarn_val[13]=81920
 yarn_val[14]=8
 
 yarn_url[0]="yarn/config"
