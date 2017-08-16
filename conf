@@ -190,3 +190,9 @@ for((i = 0; i < len; i++))
     do
         curl_exe ${zookeeper_key[$i]} ${zookeeper_val[$i]} ${zookeeper_url[$i]}
     done
+
+
+#RESTART ALL SERVICES
+curl -X POST -u "$user:$password" -H "content-type:application/json" -i \
+-d '{"redeployClientConfiguration": true}' \
+http://$localhost:$port/api/$version/clusters/$cluster_name/commands/restart
