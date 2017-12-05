@@ -27,6 +27,7 @@ kafka:
         num.replica.fetchers: 10
         log.cleaner.threads: 4
     kafka_broker:
+        log.dirs: /home/dataDir/kafka/data
         log.roll.hours: 240
         num.io.threads: 20
         broker_max_heap_size: 4096
