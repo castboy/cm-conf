@@ -1,4 +1,4 @@
-import strictyaml
+import strictyaml, os
 from cm_api.api_client import ApiResource
 
 
@@ -6,79 +6,118 @@ conf_yml= "conf.yml"
 
 
 def yml_string(file):
-    file_object = open(file)
     try:
-         s = file_object.read( )
+        file_object = open(file)
+        s = file_object.read()
+    except:
+        print "conf.yml not found"
+        os._exit(0)
     finally:
-         file_object.close( )
+        file_object.close()
+
     return s
 
 
 
 def yml_direct(s):
-    return strictyaml.load(s).data
+    try:
+        d = strictyaml.load(s).data
+    except:
+        print "error in *.yml"
+        os._exit(0)
 
+    return d
 
 
 def api(host, user, passwd, version):
-    return ApiResource(server_host=host, username=user, password=passwd, version=version)
+    try:
+        api = ApiResource(server_host=host, username=user, password=passwd, version=version)
+    except:
+        print "create cm-api error, check *.yml [cluster] item"
+        os._exit(0)
+
+    return api
 
 
 
 def cdh(api):
-    return api.get_cluster("cluster")
+    try:
+        cdh = api.get_cluster("cluster")
+    except:
+        print "create cdh error"
+        os._exit(0)
+        
+    return cdh
 
 
 
 def services(cdh):
-    direct = {}
-    for s in cdh.get_all_services():
-        if s.type == "HDFS":
-            direct["service_hdfs"] = s
-        elif s.type == "KAFKA":
-            direct["service_kafka"] = s
-        elif s.type == "YARN":
-            direct["service_yarn"] = s
-        else:
-            direct["service_zookeeper"] = s
+    try:
+        direct = {}
+        for s in cdh.get_all_services():
+            if s.type == "HDFS":
+                direct["service_hdfs"] = s
+            elif s.type == "KAFKA":
+                direct["service_kafka"] = s
+            elif s.type == "YARN":
+                direct["service_yarn"] = s
+            else:
+                direct["service_zookeeper"] = s
+    except:
+        print "get all services failed"
+        os._exit(0)
+
     return direct
 
 
 
 def services_restart(direct):
-    for key in direct:
-        direct[key].restart()
-
+    try:
+        for key in direct:
+            direct[key].restart()
+    except:
+        print "services restart failed"
+        os._exit(0)
 
 
 def conf_hdfs(service_hdfs, conf_hdfs):
-    service_hdfs.update_config(conf_hdfs["service"])
-    
-    group_namenode = service_hdfs.get_role_config_group("{0}-NAMENODE-BASE".format("hdfs"))
-    group_namenode.update_config(conf_hdfs["namenode"])
+    try:
+        service_hdfs.update_config(conf_hdfs["service"])
+        
+        group_namenode = service_hdfs.get_role_config_group("{0}-NAMENODE-BASE".format("hdfs"))
+        group_namenode.update_config(conf_hdfs["namenode"])
 
-    group_datanode = service_hdfs.get_role_config_group("{0}-DATANODE-BASE".format("hdfs"))
-    group_datanode.update_config(conf_hdfs["datanode"])
+        group_datanode = service_hdfs.get_role_config_group("{0}-DATANODE-BASE".format("hdfs"))
+        group_datanode.update_config(conf_hdfs["datanode"])
 
-    group_gateway = service_hdfs.get_role_config_group("{0}-GATEWAY-BASE".format("hdfs"))
-    group_gateway.update_config(conf_hdfs["gateway"])
-
+        group_gateway = service_hdfs.get_role_config_group("{0}-GATEWAY-BASE".format("hdfs"))
+        group_gateway.update_config(conf_hdfs["gateway"])
+    except:
+        print "config hdfs error, check *.yml [hdfs] config"
+        os._exit(0)
 
 
 def conf_kafka(service_kafka, conf_kafka):
-    service_kafka.update_config(conf_kafka["service"])
+    try:
+        service_kafka.update_config(conf_kafka["service"])
 
-    group_broker = service_kafka.get_role_config_group("{0}-KAFKA_BROKER-BASE".format("kafka"))
-    group_broker.update_config(conf_kafka["kafka_broker"])
-
+        group_broker = service_kafka.get_role_config_group("{0}-KAFKA_BROKER-BASE".format("kafka"))
+        group_broker.update_config(conf_kafka["kafka_broker"])
+    except:
+        print "config kafka error, check *.yml [kafka] config"
+        os._exit(0)
 
 
 def conf_yarn(service_yarn, conf_yarn):
-    group_rm = service_yarn.get_role_config_group("{0}-RESOURCEMANAGER-BASE".format("yarn"))
-    group_rm.update_config(conf_yarn["resource_manager"])
+    try:
+        group_rm = service_yarn.get_role_config_group("{0}-RESOURCEMANAGER-BASE".format("yarn"))
+        group_rm.update_config(conf_yarn["resource_manager"])
 
-    group_nm = service_yarn.get_role_config_group("{0}-NODEMANAGER-BASE".format("yarn"))
-    group_nm.update_config(conf_yarn["node_manager"])
+        group_nm = service_yarn.get_role_config_group("{0}-NODEMANAGER-BASE".format("yarn"))
+        group_nm.update_config(conf_yarn["node_manager"])
+    except:
+        print "config yarn error, check *.yml [yarn] config"
+        os._exit(0)
 
 
     
@@ -96,7 +135,7 @@ def main():
     
     services_restart(s)
 
-
+    print "config cm success"
 
 
 if __name__=="__main__":

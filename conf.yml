@@ -8,12 +8,12 @@ cluster:
 
 hdfs:
     namenode: 
-        dfs_name_dir_list: /home/dataDir/data/osd/dfs/nn
+        dfs_name_dir_list: /home/dataDir/data/osd/dfs/nn     #severial dirs, commas between each other: /home/dataDir/data/osd/dfs/nn,/mnt/hdfs/data/nn
         dfs_namenode_handler_count: 32
         dfs_namenode_service_handler_count: 32
         dfs_namenode_servicerpc_address: 8022
     datanode:
-        dfs_data_dir_list: /home/dataDir/data/osd/dfs/dn
+        dfs_data_dir_list: /home/dataDir/data/osd/dfs/dn     #severial dirs, commas between each other: /home/dataDir/data/osd/dfs/nn,/mnt/hdfs/data/nn
         dfs_datanode_max_xcievers: 8192
     service:
         smon_client_config_overrides: <property><name>dfs.socket.timeout</name><value>30000</value></property><property><name>dfs.datanode.socket.write.timeout</name><value>30000</value></property><property><name>ipc.client.connect.max.retries</name><value>5</value></property><property><name>fs.permissions.umask-mode</name><value>000</value></property>
@@ -27,7 +27,7 @@ kafka:
         num.replica.fetchers: 10
         log.cleaner.threads: 4
     kafka_broker:
-        log.dirs: /home/dataDir/kafka/data
+        log.dirs: /home/dataDir/kafka/data     #severial dirs, commas between each other: /home/dataDir/kafka/data,/mnt/kafka/data
         log.roll.hours: 240
         num.io.threads: 20
         broker_max_heap_size: 4096
