@@ -15,11 +15,9 @@ hdfs_key[2]="fs_checkpoint_dir_list"
 hdfs_key[3]="dfs_datanode_max_xcievers"
 hdfs_key[4]="dfs_namenode_handler_count"
 hdfs_key[5]="dfs_namenode_service_handler_count"
-hdfs_key[6]="service_health_suppression_hdfs_canary_health"
-hdfs_key[7]="role_health_suppression_data_node_block_count"
-hdfs_key[8]="smon_client_config_overrides"
-hdfs_key[9]="dfs_namenode_servicerpc_address"
-hdfs_key[10]="dfs_client_use_trash"
+hdfs_key[6]="smon_client_config_overrides"
+hdfs_key[7]="dfs_namenode_servicerpc_address"
+hdfs_key[8]="dfs_client_use_trash"
 
 hdfs_val[0]="/home/dataDir/data/osd/dfs/dn"
 hdfs_val[1]="/home/dataDir/data/osd/dfs/nn"
@@ -27,11 +25,9 @@ hdfs_val[2]="/home/dataDir/data/osd/dfs/snn"
 hdfs_val[3]=8192
 hdfs_val[4]=32
 hdfs_val[5]=32
-hdfs_val[6]=true
-hdfs_val[7]=true
-hdfs_val[8]="<property><name>dfs.socket.timeout</name><value>30000</value></property><property><name>dfs.datanode.socket.write.timeout</name><value>30000</value></property><property><name>ipc.client.connect.max.retries</name><value>5</value></property><property><name>fs.permissions.umask-mode</name><value>000</value></property>"
-hdfs_val[9]=8022
-hdfs_val[10]=true
+hdfs_val[6]="<property><name>dfs.socket.timeout</name><value>30000</value></property><property><name>dfs.datanode.socket.write.timeout</name><value>30000</value></property><property><name>ipc.client.connect.max.retries</name><value>5</value></property><property><name>fs.permissions.umask-mode</name><value>000</value></property>"
+hdfs_val[7]=8022
+hdfs_val[8]=true
 
 hdfs_url[0]="hdfs/roleConfigGroups/hdfs-DATANODE-BASE/config"
 hdfs_url[1]="hdfs/roleConfigGroups/hdfs-NAMENODE-BASE/config"
@@ -40,10 +36,8 @@ hdfs_url[3]="hdfs/roleConfigGroups/hdfs-DATANODE-BASE/config"
 hdfs_url[4]="hdfs/roleConfigGroups/hdfs-NAMENODE-BASE/config"
 hdfs_url[5]="hdfs/roleConfigGroups/hdfs-NAMENODE-BASE/config"
 hdfs_url[6]="hdfs/config"
-hdfs_url[7]="hdfs/roleConfigGroups/hdfs-DATANODE-BASE/config"
-hdfs_url[8]="hdfs/config"
-hdfs_url[9]="hdfs/roleConfigGroups/hdfs-NAMENODE-BASE/config"
-hdfs_url[10]="hdfs/roleConfigGroups/hdfs-GATEWAY-BASE/config"
+hdfs_url[7]="hdfs/roleConfigGroups/hdfs-NAMENODE-BASE/config"
+hdfs_url[8]="hdfs/roleConfigGroups/hdfs-GATEWAY-BASE/config"
 
 #KAFKA
 kafka_key[0]="auto.create.topics.enable"
@@ -124,8 +118,8 @@ yarn_val[9]=81920
 yarn_val[10]=24
 yarn_val[11]=81920
 yarn_val[12]=24
-yarn_val[13]=81920
-yarn_val[14]=8
+yarn_val[13]=19
+yarn_val[14]=1
 
 yarn_url[0]="yarn/config"
 yarn_url[1]="yarn/config"
