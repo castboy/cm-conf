@@ -34,11 +34,16 @@ def services(cdh):
             direct["service_hdfs"] = s
         elif s.type == "KAFKA":
             direct["service_kafka"] = s
-        elif s.type == "YARN`":
+        elif s.type == "YARN":
             direct["service_yarn"] = s
         else:
             direct["service_zookeeper"] = s
     return direct
+
+
+def services_restart(direct):
+    for key in direct:
+        direct[key].restart()
 
 
 
@@ -78,8 +83,10 @@ def main():
     s = services(c)
     conf_hdfs(s["service_hdfs"], d["hdfs"])
     conf_kafka(s["service_kafka"], d["kafka"])
-    #conf_yarn(s["service_yarn"], d["yarn"])
+    conf_yarn(s["service_yarn"], d["yarn"])
     
+
+    services_restart(s)
 
 
 
